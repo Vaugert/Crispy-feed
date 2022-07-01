@@ -1,5 +1,6 @@
-| author       | User      | FK  |   |   |
+| POST         |           |     |   |   |
 |--------------|-----------|-----|---|---|
+| author       | User      | FK  |   |   |
 | title        | CharField |     |   |   |
 | content      | TextField |     |   |   |
 | created_date | DateTime  |     |   |   |
