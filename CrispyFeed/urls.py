@@ -19,7 +19,7 @@ from feed import views
 
 
 urlpatterns = [
-    path('', include('feed.urls')),
+    path('', include('feed.urls'), name='feed_urls'),
     path('admin/', admin.site.urls),
     path('', views.home_screen, name='home'),
     path('summernote/', include('django_summernote.urls')),

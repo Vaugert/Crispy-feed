@@ -76,7 +76,7 @@
 <h3>Leave a comment:</h3>
 <p>Posting as : {{  }}</p>
 <form method="post" style="margin-top:1em ;">
-{{ comment_form | crispy }}
+{{ CommentForm | crispy }}
 {% csrf_token %}
 <button type="submit" class="btn btn-signup">Comment!</button>
 </form>

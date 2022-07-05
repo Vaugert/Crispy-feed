@@ -29,15 +29,21 @@ def post_details(request, pk):
     }
 
 
-    return render(request, 'post_details.html')
+    return render(request, 'templates/post_details.html', context)
 
 
 def post_comment(request):
     
     if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home_screen')
 
-        
 
-        return redirect ('home_screen')
-    return render(request, 'templates/post_details.html' )
+    form = CommentForm()
+    context = {
+        'Commentform': Commentform
+    }
+    return render(request, 'templates/post_details.html', context)
 
