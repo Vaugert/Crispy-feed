@@ -29,7 +29,7 @@ def post_details(request, pk):
     }
 
 
-    return render(request, 'templates/post_details.html', context)
+    return render(request, 'posts/post_details.html', context)
 
 
 def post_comment(request):

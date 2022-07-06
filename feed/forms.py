@@ -5,7 +5,7 @@ class CommentForm(forms.ModelForm):
     class Meta:
         fields = ('content',)
         labels = {
-            'content': ('Leave a comment')
+            'content': ('Leave a comment!')
         } 
         model = Comment
         widgets = {'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 3})}
