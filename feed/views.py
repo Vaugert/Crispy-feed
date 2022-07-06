@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Comment
-from .forms import CommentForm
+from .forms import CommentForm, PostForm
 
 
 def home_screen(request):
@@ -15,35 +15,60 @@ def home_screen(request):
 
 
 def post_details(request, pk):
+
     post = get_object_or_404(Post, pk=pk)
     comments = Comment.objects.filter(post=post)
+    form = CommentForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
 
     context = {
-        'post ': post,
+        'post': post,
         'comments': comments,
-        'CommentForm': CommentForm
-        
-        
-
-
+        'form': form
     }
-
 
     return render(request, 'posts/post_details.html', context)
 
 
-def post_comment(request):
-    
+def delete_post(request, pk):
+    """Delete Post"""
+    post = get_object_or_404(Post, pk=pk)
+    if request.user == post.author:
+        post.delete()
+
+    return redirect('home')
+
+
+def create_post(request):
+    form = PostForm(request.POST)
     if request.method == 'POST':
-        form = CommentForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('home_screen')
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('home')
 
-
-    form = CommentForm()
     context = {
-        'Commentform': Commentform
+        'form': form
     }
-    return render(request, 'templates/post_details.html', context)
+
+    return render(request, 'posts/create_post.html', context)
+
+
+def edit_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.user == post.author:
+      if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+
+    
+
+
+
+
+
+
+
 
