@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<article class="container-fluid create_post-site-body"> 
+    <div class="container" >
+        <div class="row col-md-8 offset-md-2 ">
+            <h1 class="mt-4">Publish Something Crispy<i class="fa-solid fa-cookie-bite"></i></h1>
+        </div>
+        
+    <div class="row">
+        <div class="col-md-8 offset-md-2" id="single-post3">
+            <form method="POST" action="">
+                {% csrf_token %}
+                {{ form }}
+                <div class="col-md-2 offset-9 float-end mt-3 pe-2">
+                    <input class="btn btn-success btn-lg create-post-button mb-3" type="submit" name="Submit" value="Post">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        
+    </div>
+    </div>
+    </article>
+{% endblock %}

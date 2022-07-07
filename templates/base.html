@@ -25,6 +25,13 @@
                             Home
                         </a>
                     </li>
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'account_logout' %}" class="nav-link text-light">
+                            Logout
+                        </a>
+                    </li>
+                    {% else %}
                     <li class="nav-item">
                         <a href="{% url 'account_login' %}" class="nav-link text-light">
                             Login
@@ -35,6 +42,7 @@
                             Register
                         </a>
                     </li>
+                    {% endif %}
                     {% if request.user.is_authenticated %}
                     <li>
                         <a href="{% url 'create_post' %}" class="nav-link text-light">

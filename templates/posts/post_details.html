@@ -12,8 +12,10 @@
                 <hr>
                 <p id="post-content">{{ post.content }}</p>
                 <hr>
-                {% if request.user.is_authenticated %}
+                {% if post.author == request.user %}
+                <a href="{% url 'edit_post' post.pk %}" class="btn btn-info mt-3 mb-3">Edit Post</a>
                 <a href="{% url 'delete_post' post.pk %}" class="btn btn-danger mt-3 mb-3">Delete</a>
+                
                 
                 {% endif %}
                 <!--<div class="row">

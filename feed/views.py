@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.core.paginator import Paginator
 from .models import Post, Comment
 from .forms import CommentForm, PostForm
 
@@ -6,12 +7,12 @@ from .forms import CommentForm, PostForm
 def home_screen(request):
     """Home Screen View"""
     posts = Post.objects.all()
+    paginate = Paginator(posts, 6)
     context = {
         'posts': posts
 
         }
     return render(request, 'index.html', context)
-
 
 
 def post_details(request, pk):
@@ -60,8 +61,19 @@ def create_post(request):
 def edit_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.user == post.author:
-      if request.method == 'POST':
         form = PostForm(request.POST, instance=post)
+        if request.method == 'POST':
+            return redirect('post_details')
+
+    context = {
+        'form': form
+    }
+
+    return render(request, 'posts/edit_post.html')
+    
+
+def post_like(request, pk):
+    post = get_object_or_404(Post, pk)
 
     
 
