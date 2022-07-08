@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from django.core.paginator import Paginator
 from .models import Post, Comment
 from .forms import CommentForm, PostForm
@@ -20,12 +21,16 @@ def post_details(request, pk):
     post = get_object_or_404(Post, pk=pk)
     comments = Comment.objects.filter(post=post)
     form = CommentForm(request.POST)
+    author = request.user
     if request.method == 'POST':
         if form.is_valid():
+            form.instance.author = author
+            form.instance.post
             form.save()
-
+            return redirect('post_details', post.pk)
     context = {
         'post': post,
+        'author': author,
         'comments': comments,
         'form': form
     }

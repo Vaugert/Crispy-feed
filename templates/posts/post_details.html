@@ -29,8 +29,8 @@
                     
                     {% if request.user.is_authenticated %}
                         <h5>Leave a comment:</h5>
-                        <h6>Posting as : {{ comment.author }}</h6> 
-                        <form method="POST" action=""style="margin-top:1em ;">
+                        <h6>Posting as : {{ comments.author }}</h6> 
+                        <form method="POST" action="" style="margin-top:1em ;">
                         {{ form | crispy }}
                         {% csrf_token %}
                         <button type="submit" class="btn  btn-outline-primary mb-3">Comment!</button>
@@ -38,7 +38,10 @@
                     {% endif %}
                     {% for comment in comments %}
                     <div class="col-12">
-                        <p> {{ comment.content }}</p>
+                        <div class="row">
+                            <p> {{ comments.content }}</p>
+                        </div>
+                        
                     </div>
                     {% endfor %}
 
