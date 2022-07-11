@@ -19,22 +19,24 @@ def home_screen(request):
 def post_details(request, pk):
 
     post = get_object_or_404(Post, pk=pk)
-    comments = Comment.objects.filter(post=post)
+    comments = post.post_comments.all()
     form = CommentForm(request.POST)
     author = request.user
     if request.method == 'POST':
         if form.is_valid():
             form.instance.author = author
-            form.instance.post
+            form.instance.post = post
             form.save()
             return redirect('post_details', post.pk)
+    
+    print(comments)
+
     context = {
         'post': post,
         'author': author,
         'comments': comments,
         'form': form
     }
-
     return render(request, 'posts/post_details.html', context)
 
 
@@ -66,15 +68,15 @@ def create_post(request):
 def edit_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.user == post.author:
-        form = PostForm(request.POST, instance=post)
+        form = PostForm(instance=post)
         if request.method == 'POST':
-            return redirect('post_details')
+            return redirect('post_details', post.pk)
 
     context = {
         'form': form
     }
 
-    return render(request, 'posts/edit_post.html')
+    return render(request, 'posts/edit_post.html', context)
     
 
 def post_like(request, pk):
