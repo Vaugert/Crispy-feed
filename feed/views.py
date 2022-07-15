@@ -8,7 +8,7 @@ from .forms import CommentForm, PostForm
 def home_screen(request):
     """Home Screen View"""
     posts = Post.objects.all()
-    paginate = Paginator(posts, 6)
+    paginateby = Paginator(posts, 6)
     context = {
         'posts': posts
 
@@ -69,7 +69,13 @@ def edit_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.user == post.author:
         form = PostForm(instance=post)
+        author = request.user
         if request.method == 'POST':
+            form = PostForm(request.POST, instance=post)
+            if form.is_valid():
+                form.instance.author = author
+                form.instance.post = post
+                form.save()
             return redirect('post_details', post.pk)
 
     context = {
@@ -78,9 +84,6 @@ def edit_post(request, pk):
 
     return render(request, 'posts/edit_post.html', context)
     
-
-def post_like(request, pk):
-    post = get_object_or_404(Post, pk)
 
     
 

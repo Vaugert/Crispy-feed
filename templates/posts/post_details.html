@@ -5,12 +5,13 @@
 
 
 <article class="details_site-body">
-    <div class="container px-4 px-lg-5" >
+    <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
-            <div class="col-md-10 col-lg-8 col-xl-7 mt-5 mb-4" id="single-post2">
-                <h1 id="post_details_header">{{ post.title }}</h1>
+            <div class="col-md-10 col-lg-8 col-xl-7 mt-5 mb-5" id="single-post2">
+                <h1 class="col-9 offset-1 mt-3" id="post_details_header"><i class="fa-regular fa-newspaper"></i> {{ post.title }}</h1>
+                <h6>Posted by : <i class="fa-regular fa-at"></i>{{ post.author }} on {{ post.created_date }}</h6>
                 <hr>
-                <p id="post-content">{{ post.content }}</p>
+                <p id="post-content"><i class="fa-solid fa-quote-left"></i> {{ post.content }} <i class="fa-solid fa-quote-right"></i></p>
                 <hr>
                 {% if post.author == request.user %}
                 <a href="{% url 'edit_post' post.pk %}" class="btn btn-info mt-3 mb-3">Edit Post</a>
@@ -18,14 +19,8 @@
                 
                 
                 {% endif %}
-                <!--<div class="row">
-                    <p>comment</p>
-                    <div class="col-12">
-                        <form method="POST" action="">
-                            {{ form }}
-                        </form>
-                    </div>-->
-                    <hr>
+                
+                  
                     
                     {% if request.user.is_authenticated %}
                         <h5>Leave a comment:</h5>
@@ -36,10 +31,14 @@
                         <button type="submit" class="btn  btn-outline-primary mb-3">Comment!</button>
                         </form>
                     {% endif %}
+                    <h5 class="col-6 offset-3 comment-header"><i class="fa-solid fa-comment"></i> Related comments:</h5>
                     {% for comment in comments %}
-                    <div class="col-4">
+                    <div class="col-6 offset-3 mt-3 mb-3" id="comment-box">
+                        <h6 id="author_comment">{{ comment.author }} </h6>
+                        <hr>
                         <div class="row">
-                            <p> {{ comment.content }}</p>
+                            
+                            <p class="ml-3"> {{ comment.content }}</p>
                         </div>
                         
                     </div>

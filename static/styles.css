@@ -4,6 +4,7 @@
 .site-body {
     background-color: #e2e9c0;
     
+    
 }
 
 .details_site-body{
@@ -38,6 +39,8 @@ hr {
 
 
 
+
+
 /* Footer */
 footer {
     background-color: rgb(49, 49, 49);
@@ -60,6 +63,16 @@ footer {
 }
 
 
+#comment-box{
+    
+
+}
+
+#post-content i {
+    font-size: 1rem;
+}
+
+
 
 
 
@@ -67,6 +80,7 @@ footer {
     border: 3px solid rgb(49, 49, 49);
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    
     
 
 }
