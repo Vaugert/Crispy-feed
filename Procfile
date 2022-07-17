@@ -1,1 +1,1 @@
-web: gunicorn Crispyfeed.wsgi
+web: gunicorn CrispyFeed.wsgi
